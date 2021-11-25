@@ -1,4 +1,8 @@
 # Demo for VRDL HW2
+## Timing Benchmark
+- Colab Demo Link: [https://colab.research.google.com/drive/1ox_6ci-s-CTuOB7bGSD-VMFPJ_y45LEQ?usp=sharing](https://colab.research.google.com/drive/1ox_6ci-s-CTuOB7bGSD-VMFPJ_y45LEQ?usp=sharing)
+- Timing: 0.083s per image
+![](https://i.imgur.com/pugENka.png)
 
 ## References
 
