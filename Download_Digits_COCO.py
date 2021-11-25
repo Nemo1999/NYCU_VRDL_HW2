@@ -21,7 +21,7 @@ if not opt.test_only:
     url = 'https://drive.google.com/uc?id=1lrKueI4HrySQDGvpkilQN9BfaMUN7hZi'
     output = 'datasets/Digits/train.zip'
     gdown.download(url, output, quiet=False)
-    subprocess.run("unzip datasets/Digits/train.zip -d datasets/Digits/", shell=True)
+    subprocess.run("unzip -q datasets/Digits/train.zip -d datasets/Digits/", shell=True)
     shutil.rmtree('datasets/Digits/__MACOSX')
     os.mkdir('datasets/Digits/train/images')
     os.mkdir('datasets/Digits/train/labels')
@@ -32,7 +32,7 @@ if not opt.test_only:
 url = 'https://drive.google.com/uc?id=1Fm-avdeNgzhPxhvia0iw9yZzcoOggy7I'
 output = 'datasets/Digits/test.zip'
 gdown.download(url, output, quiet=False)
-subprocess.run("unzip datasets/Digits/test.zip -d datasets/Digits/", shell=True)
+subprocess.run("unzip -q datasets/Digits/test.zip -d datasets/Digits/", shell=True)
 shutil.rmtree('datasets/Digits/__MACOSX')
 os.mkdir('datasets/Digits/test/images')
 os.mkdir('datasets/Digits/test/labels')
