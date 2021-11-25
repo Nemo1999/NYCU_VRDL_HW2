@@ -27,12 +27,11 @@ result_to_json = []
 for img_name in tqdm.tqdm(data_listdir):
     # the image_name is as same as the image_id
     image_id = int(img_name[:-4])
-    # read the image
+    # image path
     img_path = os.path.join(data_dir, img_name)
-    img = Image.open(img_path)
-    w, h = img.size[0], img.size[1]
+    
     # your model prediction
-    pred = model(img, size=640)
+    pred = model(img_path)
   
     #help(pred)
     pred = pred.xyxy[0].cpu().detach().numpy()
