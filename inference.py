@@ -4,34 +4,15 @@ import glob
 from PIL import Image
 import json
 import tqdm
+import argparse
 
-model = torch.hub.load('.', 'custom', path='runs/train/exp13/weights/best.pt',source='local')
+parser = argparse.ArgumentParser()
+parser.add_argument('--model', type=str, default='runs/train/exp/weights/best.pt', help='model path')
+opt = parser.parse_args()
+
+model = torch.hub.load('.', 'custom', path=opt.model, source='local')
 # help(model)
 print(model.conf, model.classes, model.iou)
-"""
-# Test your inference time
-TEST_IMAGE_NUMBER = 100 # This number is fixed.
-test_img_list = []
-
-# Read image (Be careful with the image order)
-data_listdir.sort(key = lambda x: int(x[:-4]))
-for img_name in data_listdir[:TEST_IMAGE_NUMBER]:
-  img_path = os.path.join("/content/mmdetection/test", img_name)
-  img = cv2.imread(img_path)
-  test_img_list.append(img)
-
-start_time = time.time()
-for img in tqdm(test_img_list):
-    # your model prediction
-    pred = inference_detector(model, img)
-
-end_time  = time.time()
-print("\nInference time per image: ", (end_time - start_time) / len(test_img_list))
-
-# Remember to screenshot!
-
-"""
-
 
 
 # Use the results from your model to generate the output json file
@@ -78,5 +59,6 @@ for img_name in tqdm.tqdm(data_listdir):
 # Write the list to answer.json 
 json_object = json.dumps(result_to_json, indent=4)
 
-with open("answer.json", "w") as outfile:
+print("answer written to answer.json")
+with open("../answer.json", "w") as outfile:
     outfile.write(json_object)

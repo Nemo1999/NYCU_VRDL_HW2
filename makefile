@@ -6,19 +6,18 @@ install:
 	@echo "Installing dependencies"
 	pip install -r yolov5/requirements.txt
 	pip install gdown
-	pip install googledrivedownloader
 
 getdataset: datasets/Digits/test datasets/Digits/train datasets/Digits/validate
 	@echo "Downloading datasets..."
 
-train: yolov5/runs/train/exp
+train: getdataset yolov5/runs/train/exp
 	@echo "Training..."
 
 inference: yolo/runs/train/exp/weights/best.pt
 	@echo "Evaluating..."
-	python inference.py --model yolov5/runs/train/exp/weights/best.pt 
+	cd yolov5 && python ../inference.py --model runs/train/exp/weights/best.pt 
 
-reproduce:
+reproduce: getdataset
 	@echo downloading model.pth from google drive
 	gdown "https://drive.google.com/uc?id=13KMwvYO4WZFlfM6IxOW6IXefdFKW_7pP"
 	@echo "Reproducing answer.json..."
@@ -32,12 +31,11 @@ datasets/Digits/validate:
 
 yolov5/runs/train/exp: 
 	@echo "Training..."
-	python3 yolov5/train.py --img-size 640 \
-	                        --dataset Digits.yaml \
-							--epochs 80 \
+	cd yolov5 && python3 train.py --img-size 512 \
+	                        --data ../Digits.yaml \
+							--epochs 50 \
 							--batch-size 16 \
-							--weights yolov5/weights/yolov5l.pth \
-							--multi-scale  \
-							--hyp hyp.digits.json
+							--weights yolov5l.pt \
+							--hyp ../hyp.digits.yaml
 
 
