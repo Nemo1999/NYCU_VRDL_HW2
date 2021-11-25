@@ -36,7 +36,7 @@ yolov5/runs/train/exp: getdataset
 	@echo "Training..."
 	cd yolov5 && python3 train.py --img-size 512 \
 	                        --data ../Digits.yaml \
-							--epochs 50 \
+							--epochs 80 \
 							--batch-size 16 \
 							--weights yolov5l.pt \
 							--hyp ../hyp.digits.yaml
